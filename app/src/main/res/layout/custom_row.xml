@@ -7,9 +7,16 @@
     android:id="@+id/rowLayout">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_width="397dp"
+        android:layout_height="196dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/layout_bg"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.52">
 
         <TextView
             android:id="@+id/shop_name"
@@ -17,7 +24,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Shop_name"
-            android:textSize="20sp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/shop_adress"
@@ -25,7 +32,7 @@
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:text="Shop_adress"
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/shop_grade"
@@ -35,7 +42,7 @@
             android:padding="10dp"
             android:text="Shop_grade"
 
-            android:textSize="18sp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,7 +59,7 @@
                 android:gravity="right"
                 android:padding="10dp"
                 android:text="Samsung"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/shop_others"
@@ -62,8 +69,9 @@
                 android:gravity="right"
                 android:padding="10dp"
                 android:text="Others"
-                android:textSize="18sp" />
+                android:textSize="16sp" />
 
         </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
