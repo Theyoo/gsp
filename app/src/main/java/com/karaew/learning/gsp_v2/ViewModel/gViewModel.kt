@@ -1,14 +1,18 @@
 package com.karaew.learning.gsp_v2.ViewModel
 
 import android.app.Application
+
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.karaew.learning.gsp_v2.Database.ModelDatabase
 import com.karaew.learning.gsp_v2.Model.ModelEntity
 import com.karaew.learning.gsp_v2.Repository.ModelRepository
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import retrofit2.Call
+import retrofit2.Response
+
 
 class gViewModel(application: Application):AndroidViewModel(application) {
 
@@ -21,6 +25,8 @@ repository = ModelRepository(listShopDao)
     readListShop = repository.readAllShopList
 
 }
+
+
 
     fun addShop(shop: ModelEntity){
 
@@ -46,5 +52,28 @@ repository = ModelRepository(listShopDao)
         }
 
     }
+
+
+fun retrofit(shop: ModelEntity){
+  GlobalScope.launch(Dispatchers.IO) {
+       delay(500)
+       repository.api.postDataApi(shop).enqueue(object:retrofit2.Callback<List<ModelEntity>> {
+           override fun onResponse(
+               call: Call<List<ModelEntity>>?,
+               response: Response<List<ModelEntity>>?
+           ) {
+               Log.d("retrofit","Data: ${response.toString()}")
+           }
+
+           override fun onFailure(call: Call<List<ModelEntity>>?, t: Throwable?) {
+               Log.d("retrofit","Error: ${t}")
+
+           }
+
+       })
+    }
+
+}
+
 
 }

@@ -3,7 +3,6 @@ package com.karaew.learning.gsp_v2.Model
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.versionedparcelable.VersionedParcelize
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

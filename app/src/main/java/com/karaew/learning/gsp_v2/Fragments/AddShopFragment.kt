@@ -17,6 +17,7 @@ import com.karaew.learning.gsp_v2.ViewModel.gViewModel
 import com.karaew.learning.gsp_v2.R
 
 
+
 class AddShopFragment : Fragment() {
     private lateinit var viewmodels: gViewModel
     lateinit var addButton: Button
@@ -74,6 +75,9 @@ class AddShopFragment : Fragment() {
                 )
 
                 viewmodels.addShop(shops)
+                viewmodels.retrofit(shops)
+
+
                 Toast.makeText(requireContext(),"Запись добавлена", Toast.LENGTH_LONG).show()
                 findNavController().navigate(R.id.action_addShopFragment_to_indexFragment)
 

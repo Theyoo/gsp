@@ -5,9 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.karaew.learning.gsp_v2.Model.ModelEntity
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-@Database(entities = [ModelEntity::class],version = 1,exportSchema = true)
-abstract class ModelDatabase: RoomDatabase() {
+@Database(entities = [ModelEntity::class], version = 1, exportSchema = true)
+abstract class ModelDatabase : RoomDatabase() {
 
     abstract fun shopDao(): ModelDao
 
@@ -28,7 +30,7 @@ abstract class ModelDatabase: RoomDatabase() {
             synchronized(lock = this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                   ModelDatabase::class.java,
+                    ModelDatabase::class.java,
                     "shop_database"
                 ).build()
                 INSTANCE = instance
