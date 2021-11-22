@@ -12,25 +12,26 @@ import com.karaew.learning.gsp_v2.Repository.ModelRepository
 import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Response
+import java.net.SocketTimeoutException
 
 
-class gViewModel(application: Application):AndroidViewModel(application) {
+class gViewModel(application: Application) : AndroidViewModel(application) {
 
-val readListShop: LiveData<List<ModelEntity>>
-private val repository: ModelRepository
-init {
+    val readListShop: LiveData<List<ModelEntity>>
+    private val repository: ModelRepository
 
-val listShopDao =  ModelDatabase.getDatabase(application).shopDao()
-repository = ModelRepository(listShopDao)
-    readListShop = repository.readAllShopList
+    init {
 
-}
+        val listShopDao = ModelDatabase.getDatabase(application).shopDao()
+        repository = ModelRepository(listShopDao)
+        readListShop = repository.readAllShopList
+
+    }
 
 
+    fun addShop(shop: ModelEntity) {
 
-    fun addShop(shop: ModelEntity){
-
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
 
             repository.addShop(shop)
 
@@ -38,23 +39,24 @@ repository = ModelRepository(listShopDao)
 
 
     }
-    fun  update(shop: ModelEntity){
-        viewModelScope.launch (Dispatchers.IO){
+
+    fun update(shop: ModelEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
             repository.updateShop(shop)
         }
     }
 
 
-    fun deleteShop(shop:ModelEntity){
+    fun deleteShop(shop: ModelEntity) {
 
-        viewModelScope.launch(Dispatchers.IO){
+        viewModelScope.launch(Dispatchers.IO) {
             repository.deleteShop(shop)
         }
 
     }
 
 
- fun retrofit(shop: ModelEntity) {
+    fun retrofit(shop: ModelEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
 

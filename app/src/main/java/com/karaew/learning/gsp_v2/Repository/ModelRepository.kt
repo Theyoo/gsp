@@ -19,7 +19,7 @@ class ModelRepository(private val shopDao: ModelDao) {
         .readTimeout(100, TimeUnit.SECONDS).build()
 
     val api = Retrofit.Builder()
-        .baseUrl("http://localhost:3030")
+        .baseUrl("http://192.168.0.20:3030")
         .client(client)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
