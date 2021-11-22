@@ -54,26 +54,35 @@ repository = ModelRepository(listShopDao)
     }
 
 
-fun retrofit(shop: ModelEntity){
-  GlobalScope.launch(Dispatchers.IO) {
-       delay(500)
-       repository.api.postDataApi(shop).enqueue(object:retrofit2.Callback<List<ModelEntity>> {
-           override fun onResponse(
-               call: Call<List<ModelEntity>>?,
-               response: Response<List<ModelEntity>>?
-           ) {
-               Log.d("retrofit","Data: ${response.toString()}")
-           }
+ fun retrofit(shop: ModelEntity) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
 
-           override fun onFailure(call: Call<List<ModelEntity>>?, t: Throwable?) {
-               Log.d("retrofit","Error: ${t}")
+                repository.api.postDataApi(shop)
+                    .enqueue(object : retrofit2.Callback<List<ModelEntity>> {
+                        override fun onResponse(
+                            call: Call<List<ModelEntity>>?,
+                            response: Response<List<ModelEntity>>?
+                        ) {
+                            Log.d("retrofit", "Data: ${response.toString()}")
+                        }
 
-           }
+                        override fun onFailure(call: Call<List<ModelEntity>>?, t: Throwable?) {
+                            Log.d("retrofit", "Error: ${t}")
 
-       })
+                        }
+
+                    })
+            } catch (e: SocketTimeoutException) {
+
+                e.printStackTrace()
+
+            }
+
+        }
+
+
     }
-
-}
 
 
 }
